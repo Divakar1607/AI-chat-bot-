@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HD AI Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="logo.png" class="splash-logo-img">
+            <p class="splash-text">A Hackathon Chatbot AI</p>
+        </div>
+    </div>
+    <!-- Login Overlay -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <h2><img src="logo1.png" style="width: 75px; height: 75px;"></h2>
+                <p>Welcome! Please enter your Login Details to start hacking.</p>
+            </div>
+            <div class="login-input-group">
+                <input type="text" id="username-input" placeholder="Username" autofocus>
+            </div>
+            <div class="login-input-group" style="margin-top: 12px;">
+                <input type="password" id="password-input" placeholder="Password">
+            </div>
+            <div class="login-actions">
+                <button id="login-btn" class="login-submit-btn">Log In</button>
+                <button id="register-btn" class="login-submit-btn register">Register</button>
+            </div>
+            <p id="login-error" class="login-error" style="display: none;">Please enter a valid name.</p>
+        </div>
+    </div>
+
+    <!-- Settings Overlay -->
+    <div id="settings-overlay" class="settings-overlay" style="display: none;">
+        <div class="settings-card">
+            <div class="settings-close" id="settings-close"><i class="fa-solid fa-xmark"></i></div>
+
+            <div class="settings-profile-box">
+                <div class="profile-info">
+                    <div class="profile-avatar"><i class="fa-regular fa-user"></i></div>
+                    <h3 id="settings-username">USER_NAME</h3>
+                </div>
+                <button id="settings-logout-btn" class="text-btn">Log out</button>
+            </div>
+
+            <div class="settings-options">
+                <div class="settings-row">
+                    <span class="settings-label">Theme</span>
+                    <div class="theme-switch" id="theme-switch">
+                        <div class="theme-option dark active" data-theme="dark">DARK</div>
+                        <div class="theme-option light" data-theme="light">LIGHT</div>
+                    </div>
+                </div>
+
+                <button id="settings-delete-history-btn" class="settings-action-btn">
+                    Delete Chat History
+                </button>
+
+                <button id="settings-delete-account-btn" class="settings-action-btn danger">
+                    Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><img src="logo1.png" style="width: 75px; height: 75px;">HD </h2>
+            </div>
+            <div class="sidebar-menu">
+                <button class="menu-item active" id="new-chat-btn"><i class="fa-solid fa-message"></i> New Chat</button>
+                <button class="menu-item" id="tips-btn"><i class="fa-solid fa-lightbulb"></i> Tips & Tricks</button>
+                <button class="menu-item" id="settings-btn"><i class="fa-solid fa-gear"></i> Settings</button>
+            </div>
+            <div class="sidebar-history">
+                <p class="history-title">Recent Chats</p>
+                <div id="history-list" class="history-list">
+                    <!-- Chat history items will appear here -->
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <p>Powered by Hugging Face 🚀</p>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div>
+                    <h1>HD Hackathon Assistant</h1>
+                    <p class="subtitle">Ask me anything about your hackathon project!</p>
+                </div>
+                <div class="theme-toggle" id="theme-toggle">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+            </header>
+
+            <div class="chat-box" id="chat-box">
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcome-screen">
+
+
+                    <div class="cards-grid">
+                        <div class="card" data-prompt="What is a Hackathon? Explain it simply for a beginner.">
+                            <span class="card-icon">🌱</span>
+                            <h3>What is a Hackathon?</h3>
+                            <p>Perfect for freshers starting from zero</p>
+                        </div>
+                        <div class="card"
+                            data-prompt="How do I register for a hackathon? Detail the step-by-step process.">
+                            <span class="card-icon">📝</span>
+                            <h3>How to Register?</h3>
+                            <p>Step-by-step registration guide</p>
+                        </div>
+                        <div class="card"
+                            data-prompt="What should I bring to an in-person hackathon? Give me a checklist.">
+                            <span class="card-icon">🎒</span>
+                            <h3>What to Bring?</h3>
+                            <p>Checklist for hackathon day</p>
+                        </div>
+                        <div class="card"
+                            data-prompt="I need help choosing a tech stack for my hackathon project. What are the best tools?">
+                            <span class="card-icon">💻</span>
+                            <h3>Tech Stack Help</h3>
+                            <p>Right tools for your skill level</p>
+                        </div>
+                        <div class="card"
+                            data-prompt="How do I give a good presentation or pitch at the end of a hackathon?">
+                            <span class="card-icon">🎤</span>
+                            <h3>Pitch Help</h3>
+                            <p>Even if you are shy or nervous</p>
+                        </div>
+                        <div class="card"
+                            data-prompt="Can I participate in a hackathon if I have no coding experience? What roles can I play?">
+                            <span class="card-icon">🙋‍♂️</span>
+                            <h3>No Coding? No Problem!</h3>
+                            <p>Yes you can still participate!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea id="user-input" placeholder="e.g. What's a good tech stack for a React app?"
+                        rows="1"></textarea>
+                    <button id="mic-btn" title="Voice Input" aria-label="Start voice input"><i
+                            class="fa-solid fa-microphone"></i></button>
+                    <button id="send-btn" title="Send (Enter)"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+                <p class="disclaimer">AI responses can be occasionally inaccurate. Good luck hacking!</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script execution -->
+    <script src="script.js"></script>
+</body>
+
+</html>
