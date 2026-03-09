@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // Simple system prompt to give the AI context about its role
 const SYSTEM_PROMPT = `You are an expert hackathon mentor and assistant. Your goal is to provide concise, helpful, and encouraging advice about hackathons. 
@@ -59,10 +59,14 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Fallback to index.html for any other routes (SPA like behavior)
-app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Serve static files
+app.use(express.static(__dirname));
 
+// Fallback
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
